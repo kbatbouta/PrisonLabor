@@ -17,9 +17,8 @@
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
+        <Optimize>true</Optimize>
         <OutputPath>..\Assemblies\</OutputPath>
-        <DefineConstants>TRACE;DEBUG</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>3</WarningLevel>
         <Prefer32Bit>false</Prefer32Bit>
