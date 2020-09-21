@@ -11,11 +11,11 @@ using System.Reflection;
 namespace AndroidTiers
 {
     internal class ApparelUtility_Patch
-
     {
         [HarmonyPatch(typeof(ApparelUtility), "CanWearTogether")]
         public class CanWearTogether_Patch
         {
+
             [HarmonyPostfix]
             public static void Listener(ThingDef A, ThingDef B, BodyDef body, ref bool __result)
             {
@@ -30,32 +30,24 @@ namespace AndroidTiers
             [HarmonyPostfix]
             public static void Listener(Pawn p, ThingDef apparel, ref bool __result)
             {
-                try
-                {
-                    if (!p.IsAndroidTier())
+                try {
+                    if(!p.IsAndroidTier())
                         return;
 
-                    bool councernFeet = apparel.apparel.bodyPartGroups.Contains(DefDatabase<BodyPartGroupDef>.GetNamed("Feet",false));
+                    bool councernFeet = apparel.apparel.bodyPartGroups.Contains(DefDatabase<BodyPartGroupDef>.GetNamed("Feet", false));
                     bool councernHanbd = apparel.apparel.bodyPartGroups.Contains(DefDatabase<BodyPartGroupDef>.GetNamed("Hands", false));
-                    if (councernHanbd || councernFeet)
-                    {
-                        if (councernFeet)
-                        {
-                            foreach (var el in p.health.hediffSet.hediffs)
-                            {
-                                if ( Utils.ExceptionBionicHaveFeet.Contains(el.def.defName))
-                                {
+                    if(councernHanbd || councernFeet) {
+                        if(councernFeet) {
+                            foreach(var el in p.health.hediffSet.hediffs) {
+                                if(Utils.ExceptionBionicHaveFeet.Contains(el.def.defName)) {
                                     __result = true;
                                     return;
                                 }
                             }
                         }
-                        else
-                        {
-                            foreach (var el in p.health.hediffSet.hediffs)
-                            {
-                                if (Utils.ExceptionBionicHaveHand.Contains(el.def.defName))
-                                {
+                        else {
+                            foreach(var el in p.health.hediffSet.hediffs) {
+                                if(Utils.ExceptionBionicHaveHand.Contains(el.def.defName)) {
                                     __result = true;
                                     return;
                                 }
@@ -63,8 +55,7 @@ namespace AndroidTiers
                         }
                     }
                 }
-                catch(Exception ex)
-                {
+                catch(Exception ex) {
                     Log.Message("[ATPP] ApparelUtility.HasPartsToWear " + ex.Message + " " + ex.StackTrace);
                 }
             }
